@@ -1,4 +1,4 @@
-# ntf-web
+# NFT-BASE-FRONT
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -26,12 +26,6 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ```sh
 npm install
 ```
-
-````
-npm i axios --save
-npm i antd-design-vue --save
-npm i sass -D
-````
 
 ### Compile and Hot-Reload for Development
 

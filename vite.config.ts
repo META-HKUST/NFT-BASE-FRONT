@@ -1,29 +1,47 @@
-import { fileURLToPath, URL } from 'url'
+import {fileURLToPath, URL} from 'url'
+import {createHtmlPlugin} from 'vite-plugin-html'
 
-import { defineConfig } from 'vite'
+import {defineConfig, loadEnv} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
+
 // https://vitejs.dev/config/
-export default defineConfig({
-  server: {
-    host: true,
-    port: 3008,
-    proxy: {
-      '/dev': 'http://localhost:3010'
+export default defineConfig(({command, mode}) => {
+    console.log(command, mode)
+    const env = loadEnv(mode, process.cwd())
+    console.log(env)
+    return {
+        server: {
+            host: true,
+            port: 3008,
+            proxy: {
+                '/dev': 'http://localhost:3010'
+            }
+        },
+        plugins: [vue(), vueJsx(),
+            // createHtmlPlugin({
+            // minify: true,
+            // entry: 'src/main.ts',
+            // template: 'public/index.html',
+            // inject: {
+            //     data: {
+            //         title: env.VITE_TITLE
+            //     }
+            // }
+            // })
+        ],
+        resolve: {
+            alias: {
+                '@': fileURLToPath(new URL('./src', import.meta.url))
+            }
+        },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: '@import "./src/style/global.scss";'
+                }
+            }
+        }
     }
-  },
-  plugins: [vue(), vueJsx()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "./src/style/global.scss";'
-      }
-    }
-  }
 })
