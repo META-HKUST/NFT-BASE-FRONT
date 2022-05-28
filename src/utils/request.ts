@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-    baseURL: '/api',
+    baseURL: 'http://unifit.ust.hk:8888/api/v1',
     timeout: 60000,
     withCredentials: true,
     headers: {

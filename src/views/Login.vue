@@ -7,13 +7,13 @@
         <p class="btn-label" @click="createAccount">Create account</p>
       </div>
       <div class="input-wrap">
-        <div class="item"><input placeholder="Email" type="email"/></div>
-        <div class="item"><input placeholder="Password" type="password"/></div>
+        <div class="item"><input placeholder="Email" type="email" v-model="state.email"/></div>
+        <div class="item"><input placeholder="Password" type="password" v-model="state.passwd"/></div>
         <div class="item">
           <p class="btn-label" @click="resetPassword">Forget the Password?</p>
         </div>
         <div class="item submit">
-          <button class="submit" @click="submit">Sure</button>
+          <button class="submit" @click="handleLogin">Sign in</button>
         </div>
       </div>
     </div>
@@ -21,23 +21,56 @@
 </template>
 
 <script setup lang="ts">
+import {toRefs, reactive, ref, toRaw} from 'vue';
 import {useRouter, useRoute} from "vue-router";
+import {notification, message} from "ant-design-vue";
+import {useStore} from "@/stores/store";
 import {login} from '@/apis/user';
+import Utils from "@/utils/utils";
 
 const router = useRouter()
 const route = useRoute()
 
+const state: any = reactive({
+  email: '',
+  passwd: ''
+})
+
+const store = useStore()
+
+if (store.token) {
+  router.replace({name: 'Home'})
+}
+
+async function handleLogin() {
+  const {email, passwd} = toRaw(state)
+  if (!email || !passwd) {
+    message.error({
+      content: '请输入Email和密码！'
+    })
+    return
+  } else if (!Utils.isValidEmail(email)) {
+    message.error("Email格式不对!")
+    return
+  }
+
+  const res: any = await login({email, passwd})
+
+  if (res.code === 100) {
+    store.setToken(res.data.token)
+    // notification.success({message: res.msg})
+    router.replace({name: "Home"})
+  } else {
+    notification.error({message: res.msg + ' (' + res.code + ')'})
+  }
+}
+
 function createAccount() {
-  router.push('/signup')
+  router.push('/register')
 }
 
 function resetPassword() {
   router.push('/resetpassword')
-}
-
-function submit() {
-  console.log('click login')
-  login()
 }
 
 </script>

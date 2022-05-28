@@ -15,9 +15,9 @@ export default defineConfig(({command, mode}) => {
         server: {
             host: true,
             port: 3008,
-            proxy: {
-                '/dev': 'http://localhost:3010'
-            }
+            // proxy: {
+            //     '/api': 'http://unifit.ust.hk:8888/api'
+            // }
         },
         plugins: [vue(), vueJsx(),
             // createHtmlPlugin({
