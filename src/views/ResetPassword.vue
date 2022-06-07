@@ -6,9 +6,9 @@
       <div class="input-wrap">
         <div class="item">
           <label>Email</label>
-          <input placeholder="Email" type="email"/></div>
+          <input placeholder="Email" type="email" v-model="email"/></div>
         <div class="item submit">
-          <button class="submit">RESET PASSWORD</button>
+          <button class="submit" @click="handleResetPasswd">RESET PASSWORD</button>
         </div>
       </div>
       <p class="goto-login" @click="gotoLogin">goto Login</p>
@@ -17,9 +17,23 @@
 </template>
 
 <script setup lang="ts">
+import {ref, toRaw} from "vue";
 import {useRouter} from "vue-router";
+import {resetPasswd} from "@/apis/user";
+import {notification, message} from "ant-design-vue";
+import Utils from "@/utils/utils";
 
 const router = useRouter()
+const email = ref('')
+
+function handleResetPasswd() {
+  if (!Utils.isValidEmail(email.value)) {
+    return message.error({
+      content: '请输入正确的Email！'
+    })
+  }
+  // resetPasswd(email.value)
+}
 
 function gotoLogin() {
   router.push('/login')

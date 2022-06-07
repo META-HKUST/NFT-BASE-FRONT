@@ -56,7 +56,7 @@ async function handleLogin() {
 
   const res: any = await login({email, passwd})
 
-  if (res.code === 100) {
+  if (res.code === 0) {
     store.setToken(res.data.token)
     // notification.success({message: res.msg})
     router.replace({name: "Home"})

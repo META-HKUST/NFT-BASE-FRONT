@@ -1,8 +1,8 @@
 <template>
-  <main>
-    <div>首页</div>
-    <button @click="handleLogout">Logout</button>
-  </main>
+  <div>
+<!--    <div>首页</div>-->
+<!--    <button @click="handleLogout">Logout</button>-->
+  </div>
 </template>
 
 <script setup lang="ts">

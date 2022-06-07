@@ -28,6 +28,21 @@ const router = createRouter({
       component: () => import('../views/ResetPassword.vue')
     },
     {
+      path: '/myaccount',
+      name: 'MyAccount',
+      component: () => import('../views/MyAccount.vue')
+    },
+    {
+      path: '/explore',
+      name: 'Explore',
+      component: () => import('../views/Explore.vue')
+    },
+    {
+      path: '/create',
+      name: 'Create',
+      component: () => import('../views/Create.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       redirect: {
         path: '/'

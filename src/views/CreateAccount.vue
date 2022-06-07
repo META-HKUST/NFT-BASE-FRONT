@@ -102,7 +102,7 @@ async function handleRegister() {
   }
 
   const res: any = await register({email, passwd, name})
-  if (res.code === 100) {
+  if (res.code === 0) {
     state.isRegister = true
     setTime()
     notification.success({message: "注册成功！请查收Email激活账号！"})
@@ -114,7 +114,7 @@ async function handleRegister() {
 async function handleSendEmail() {
   const {email, name} = toRaw(state)
   const res: any = await sendRegisterEmail({email, name})
-  if (res.code === 100) {
+  if (res.code === 0) {
     setTime()
     notification.success({message: "发送成功！请查收Email激活账号！"})
   } else {

@@ -30,3 +30,11 @@ export function sendRegisterEmail(params: any) {
         }
     })
 }
+
+export function resetPasswd(email: string) {
+    return http.post('/users/reset-passwd', null, {
+        params: {
+            email
+        }
+    })
+}

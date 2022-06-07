@@ -1,7 +1,8 @@
 import axios from 'axios';
+const env = import.meta.env
 
 const service = axios.create({
-    baseURL: 'http://unifit.ust.hk:8888/api/v1',
+    baseURL: env.VITE_BASE_URL,
     timeout: 60000,
     withCredentials: true,
     headers: {
