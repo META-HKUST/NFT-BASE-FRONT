@@ -23,7 +23,6 @@
           <button class="submit" @click="handleRegister">Create account</button>
         </div>
       </div>
-      <button class="goto-login" @click="gotoLogin">goto Login</button>
     </div>
     <div class="create-wrap registered" v-else>
       <div class="top">Verify your email</div>
@@ -34,7 +33,6 @@
           <p>没有收到Email?</p>
           <button class="send-btn" :class="state.timeout?'active':''" @click="handleSendEmail">Send email again</button>
         </div>
-        <button class="goto-login" @click="gotoLogin">goto Login</button>
       </div>
     </div>
   </div>
@@ -120,10 +118,6 @@ async function handleSendEmail() {
   } else {
     notification.error({message: res.msg + ' (' + res.code + ')'})
   }
-}
-
-function gotoLogin() {
-  router.push('/login')
 }
 
 </script>

@@ -17,7 +17,7 @@
   <div class="router-wrap">
     <RouterView/>
   </div>
-  <footer> footer</footer>
+  <Footer/>
 </template>
 
 <script setup lang="ts">
@@ -25,7 +25,7 @@ import {RouterLink, RouterView, useRouter} from 'vue-router'
 import {useStore} from "@/stores/store";
 import {notification, message} from "ant-design-vue";
 import {watch, ref} from "vue";
-
+import Footer from "@/components/Footer.vue";
 const router = useRouter()
 
 const store = useStore()
@@ -108,21 +108,12 @@ nav a:first-of-type {
   border: 0;
 }
 
-footer {
-  width: 100%;
-  height: 50px;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #1d3f57;
-}
-
 </style>
 
 <style scoped lang="scss">
 .header {
   padding: 0 20px;
+  flex-shrink: 0;
 
   .wrapper {
     width: 100%;

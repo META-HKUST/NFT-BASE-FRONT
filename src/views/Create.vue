@@ -1,6 +1,5 @@
 <template>
   <div class="create-page">
-    create
   </div>
 </template>
 
@@ -37,7 +36,6 @@ function gotoLogin() {
   display: flex;
   justify-content: flex-start;
   overflow: auto;
-  background: #abc;
   padding: 10px;
 }
 

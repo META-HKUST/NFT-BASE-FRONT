@@ -11,7 +11,6 @@
           <button class="submit" @click="handleResetPasswd">RESET PASSWORD</button>
         </div>
       </div>
-      <p class="goto-login" @click="gotoLogin">goto Login</p>
     </div>
   </div>
 </template>
@@ -33,10 +32,6 @@ function handleResetPasswd() {
     })
   }
   // resetPasswd(email.value)
-}
-
-function gotoLogin() {
-  router.push('/login')
 }
 
 </script>
