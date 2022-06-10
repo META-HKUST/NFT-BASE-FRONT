@@ -1,9 +1,9 @@
 <template>
   <div class="myaccount-page">
+    <div class="banner">
+      <img/>
+    </div>
     <div class="page-content">
-      <div class="banner">
-        <img/>
-      </div>
       <div class="header">
         <div class="user-info">
           <div class="user-img">
@@ -24,7 +24,9 @@
       </div>
       <div class="item-list">
         <div class="item" v-for="item in state.items">
-          <img class="img" :src="item.img"/>
+          <div class="board" @click="handleClickItem(item.id)">
+            <img class="img" :src="item.img"/>
+          </div>
           <div class="bottom">
             <div class="text">
               <div>{{ item.title }}</div>
@@ -33,7 +35,7 @@
             <div class="method-line">
               <div class="btn">...</div>
               <div class="like-wrap">
-                <div class="like"></div>
+                <img class="like" src="@/assets/like.svg"/>
                 <div class="like-num">{{ item.like }}</div>
               </div>
             </div>
@@ -50,6 +52,7 @@ import {useRouter} from "vue-router";
 import {resetPasswd} from "@/apis/user";
 import {notification, message} from "ant-design-vue";
 import Utils from "@/utils/utils";
+import likeImg from "@/assets/like.svg";
 
 const router = useRouter()
 const state: any = reactive(
@@ -60,10 +63,17 @@ const state: any = reactive(
 
 for (let i = 0; i < 19; i++) {
   state.items.push({
-    img: '',
+    id: i,
+    img: likeImg,
     title: 'WAW #7139',
     brief: 'Women and Weapons',
     like: 1234
+  })
+}
+
+function handleClickItem(id: string) {
+  router.push({
+    path: '/detail/' + id
   })
 }
 
@@ -76,32 +86,34 @@ for (let i = 0; i < 19; i++) {
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
   overflow: auto;
+
+
+  .banner {
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    background: #e5e5e5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+  }
 
   > .page-content {
     background: #F1F1F1;
 
-    .banner {
-      width: 100%;
-      height: 200px;
-      flex-shrink: 0;
-      background: #e5e5e5;
-
-      img {
-        width: 100%;
-        height: 100%;
-        display: none;
-      }
-    }
-
     .header {
-      background: #fff;
+      width: 1254px;
       height: 200px;
       display: flex;
       flex-flow: column nowrap;
       justify-content: flex-end;
       align-items: center;
+      padding: 0 10px;
+      background: #fff;
 
       .user-info {
         display: flex;
@@ -189,6 +201,7 @@ for (let i = 0; i < 19; i++) {
 
     }
 
+
     .item-list {
       width: 1254px;
       padding: 10px;
@@ -206,10 +219,16 @@ for (let i = 0; i < 19; i++) {
         overflow: hidden;
         background: #fff;
 
-        .img {
+        .board {
           width: 288px;
           height: 288px;
-          background: #0082bd;
+
+          .img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0082bd;
+          }
         }
       }
 
@@ -250,8 +269,6 @@ for (let i = 0; i < 19; i++) {
             .like {
               width: 20px;
               height: 20px;
-              background: #f00;
-              border-radius: 10px;
               cursor: pointer;
             }
 

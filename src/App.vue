@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="wrapper">
-      <div class="logo"> LOGO</div>
+      <div class="logo" @click="handleClickLogo"> LOGO</div>
       <div class="input-wrap"><input placeholder="search"></div>
       <nav>
         <RouterLink to="/myaccount">My account</RouterLink>
@@ -26,6 +26,7 @@ import {useStore} from "@/stores/store";
 import {notification, message} from "ant-design-vue";
 import {watch, ref} from "vue";
 import Footer from "@/components/Footer.vue";
+
 const router = useRouter()
 
 const store = useStore()
@@ -50,6 +51,10 @@ watch(() => router.currentRoute.value.path,
         showSignin.value = true
       }
     }, {immediate: true})
+
+function handleClickLogo() {
+  router.push({path: '/'})
+}
 
 </script>
 
@@ -125,6 +130,7 @@ nav a:first-of-type {
     .logo {
       margin: 0 20px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     .input-wrap {
